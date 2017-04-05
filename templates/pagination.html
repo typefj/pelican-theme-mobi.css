@@ -1,0 +1,13 @@
+{% if DEFAULT_PAGINATION %}
+    <nav class="theme-pagination top-gap-big text-center">
+        {% if articles_page.has_previous() %}
+            <a class="extend prev" rel="prev" href="{{ SITEURL }}/{{ articles_previous_page.url }}">
+                <i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        {% endif %}
+        <span class="page-number current">Page {{ articles_page.number }} / {{ articles_paginator.num_pages }}</span>
+        {% if articles_page.has_next() %}
+            <a class="extend next" rel="next" href="{{ SITEURL }}/{{ articles_next_page.url }}">
+                <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        {% endif %}
+    </nav>
+{% endif %}

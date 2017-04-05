@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+    {{ super() }}
+    {% if article.description %}
+        <meta name="description" content="{{ article.description }}"/>
+    {% endif %}
+
+    {% for tag in article.tags %}
+        <meta name="tags" content="{{ tag }}"/>
+    {% endfor %}
+
+{% endblock %}
+
+{% block content %}
+
+    <article>
+        <h1 class="text-center">
+            <a class="theme-title-link" href="{{ SITEURL }}/{{ article.url }}">
+                {{ article.title }}
+            </a>
+        </h1>
+        <div class="top-gap text-center text-muted">
+            <small>
+                Published
+                <time datetime="{{ article.date.isoformat() }}">
+                    {{ article.locale_date }}
+                </time>
+
+                <span class="theme-separator">·</span>
+
+                Category
+                <a class="text-muted" href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+            </small>
+        </div>
+
+        <div class="top-gap-big">
+            {{ article.content }}
+        </div>
+    </article>
+
+{% endblock %}

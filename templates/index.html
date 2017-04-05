@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% for article in articles_page.object_list %}
+
+        <article>
+            <h1 class="text-center">
+                <a class="theme-title-link" href="{{ SITEURL }}/{{ article.url }}">
+                    {{ article.title }}
+                </a>
+            </h1>
+            <div class="top-gap text-center text-muted">
+                <small>
+                    Published
+                    <time datetime="{{ article.date.isoformat() }}">
+                        {{ article.locale_date }}
+                    </time>
+
+                    <span class="theme-separator">·</span>
+
+                    Category
+                    <a class="text-muted" href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+                </small>
+            </div>
+
+            <div class="top-gap-big">
+                {{ article.summary }}
+            </div>
+        </article>
+        <p class="top-gap-big text-center">
+            <a href="{{ SITEURL }}/{{ article.url }}">
+                Read More...
+            </a>
+        </p>
+
+        {% if not loop.last %}
+            <hr class="top-gap-big"/>
+        {% endif %}
+    {% endfor %}
+
+    {% if articles_page.has_other_pages() %}
+        {% include 'pagination.html' %}
+    {% endif %}
+
+{% endblock %}

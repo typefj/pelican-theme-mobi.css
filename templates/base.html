@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% block head %}
+        <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+        <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+  
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+        {% if FEED_ALL_ATOM %}
+            <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate"
+                  title="{{ SITENAME }} Full Atom Feed"/>
+        {% endif %}
+        {% if FEED_ALL_RSS %}
+            <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate"
+                  title="{{ SITENAME }} Full RSS Feed"/>
+        {% endif %}
+        {% if FEED_ATOM %}
+            <link href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" type="application/atom+xml" rel="alternate"
+                  title="{{ SITENAME }} Atom Feed"/>
+        {% endif %}
+        {% if FEED_RSS %}
+            <link href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" type="application/rss+xml" rel="alternate"
+                  title="{{ SITENAME }} RSS Feed"/>
+        {% endif %}
+        {% if CATEGORY_FEED_ATOM and category %}
+            <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_ATOM|format(category.slug) }}" type="application/atom+xml"
+                  rel="alternate" title="{{ SITENAME }} Categories Atom Feed"/>
+        {% endif %}
+        {% if CATEGORY_FEED_RSS and category %}
+            <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_RSS|format(category.slug) }}" type="application/rss+xml"
+                  rel="alternate" title="{{ SITENAME }} Categories RSS Feed"/>
+        {% endif %}
+        {% if TAG_FEED_ATOM and tag %}
+            <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_ATOM|format(tag.slug) }}" type="application/atom+xml"
+                  rel="alternate" title="{{ SITENAME }} Tags Atom Feed"/>
+        {% endif %}
+        {% if TAG_FEED_RSS and tag %}
+            <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_RSS|format(tag.slug) }}" type="application/rss+xml"
+                  rel="alternate" title="{{ SITENAME }} Tags RSS Feed"/>
+        {% endif %}
+        <link href="{{ SITEURL }}/theme/css/mobi.min.css" rel="stylesheet">
+        <link href="{{ SITEURL }}/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{{ SITEURL }}/theme/css/theme.css" rel="stylesheet">
+        <link href="{{ SITEURL }}/theme/css/pygment.css" rel="stylesheet">
+    {% endblock head %}
+</head>
+
+<body>
+<div class="flex-center">
+    <div class="container">
+        {% block header %}
+            <header class="header">
+                <nav class="flex-left">
+
+                    <div class="theme-nav-item flex-center flex-middle {%if output_file=='index.html' %}theme-nav-item-current{% endif %}">
+                        <a class="unit-0 theme-nav-item-link text-center" href="{{ SITEURL }}" title="home">
+                            <i class="theme-nav-item-icon fa fa-home" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+
+                    <div class="theme-nav-item flex-center flex-middle {%if output_file=='archives.html' %}theme-nav-item-current{% endif %}">
+                        <a class="unit-0 theme-nav-item-link text-center" href="{{SITEURL}}/archives.html"
+                           title="archives">
+                            <i class="theme-nav-item-icon fa fa-archive" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+
+                <div class="theme-nav-item flex-center flex-middle {%if output_file=='categories.html' %}theme-nav-item-current{% endif %}">
+                        <a class="unit-0 theme-nav-item-link text-center" href="{{SITEURL}}/categories.html"
+                           title="categories">
+                            <i class="theme-nav-item-icon fa fa-th" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+
+                    <div class="theme-nav-item flex-center flex-middle {%if output_file=='tags.html' %}theme-nav-item-current{% endif %}">
+                        <a class="unit-0 theme-nav-item-link text-center" href="{{SITEURL}}/tags.html" title="tags">
+                            <i class="theme-nav-item-icon fa fa-tags" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+
+                    <div class="unit"></div>
+                    <div class="theme-nav-item flex-center flex-middle">
+                        <a class="unit-0 theme-nav-item-link text-center" href="{{SITEURL}}/pages/about.html" title="about">
+                            <i class="theme-nav-item-icon fa fa-user" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </nav>
+            </header>
+        {% endblock %}
+        {% block content %}
+
+
+        {% endblock %}
+
+        <hr class="top-gap-big"/>
+
+        <p class="text-center">
+            <small class="text-muted">
+                <br/>
+                Proudly powered by <a class="text-muted" href="https://blog.getpelican.com/" title="Pelican">pelican</a>
+                <span class="theme-separator">·</span>Theme
+                <a class="text-muted" href="https://github.com/typefj/pelican-theme-mobi.css">Mobi.css</a>
+            </small>
+        </p>
+
+    </div>
+
+    {% block sidebar %}
+
+        <aside class="hide-on-mobile theme-sidebar-container">
+            <h4 class="top-gap">{{ SITENAME }}</h4>
+            {% if SITESUBTITLE %} <p class="text-muted">{{ SITESUBTITLE }}</p> {% endif %}
+
+            <h5>{{ SOCIAL_WIDGET_NAME | default('social') }}</h5>
+
+            <p class="text-muted">
+                <small>
+                
+                </small>
+            </p>
+
+            <ul class="theme-list-style-none">
+              <small>
+                {% for name, link in SOCIAL %}
+                <li><a class="text-muted" href="{{link}}">{{name}}</a></li>
+                {% endfor %}</small>
+                </ul>
+
+            <h5>{{ LINKS_WIDGET_NAME | default('links') }}</h5>
+
+            <p class="text-muted">
+                <small></small>
+            </p>
+            <ul class="theme-list-style-none">
+              <small>
+                {% for name, link in LINKS %}
+                <li><a class="text-muted" href="{{link}}">{{name}}</a></li>
+                {% endfor %}</small>
+                </ul>
+
+                <h5>Pages</h5>
+
+            <p class="text-muted">
+                <small></small>
+            </p>
+            <ul class="theme-list-style-none">
+              <small>
+                 {% for pg in pages %}
+                    <li><a class="text-muted" href="{{ SITEURL }}/{{ pg.url }}">{{ pg.title }}</a></li>
+                {% endfor %}
+               </small>
+                </ul>
+        </aside>
+    {% endblock %}
+</div>
+</body>
+</html>
